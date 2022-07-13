@@ -2,7 +2,6 @@ import socket
 import playsound
 import os
 import functions
-import variables
 
 cwd = os.getcwd()
 
@@ -26,10 +25,14 @@ print("Waiting for connection......")
 # wait till a client accept
 # connection
 while(True):
-	print("Connected to client......")
 	c, addr = s.accept()
+	print("Connected to client......")
 	dataFromClient = c.recv(1024)
-	cmd = dataFromClient.decode()
+	decodedData = dataFromClient.decode()
+
+	# Decoded data split on the "@" = command @ phrase
+	cmd = decodedData.split("@")[0]
+	phrase = decodedData.split("@")[1]
 
 	if cmd == "play":
 		print("Playing...")
@@ -37,7 +40,7 @@ while(True):
 		break
 
 	elif cmd == "speak":
-		functions.speak(variables.userTextToPrint)
+		functions.speak(phrase)
 		break
 
 	elif cmd == "quit" or cmd == "exit" or cmd == "q" or cmd == "Q" or cmd == "quit()":
