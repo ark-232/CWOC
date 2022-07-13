@@ -1,8 +1,9 @@
 import socket
+import variables
 
 # take the server name and port name
 
-host = 'local host'
+host = input("Enter the host IP: ")
 port = 65001	# port number
 
 # create a socket at client side
@@ -14,8 +15,10 @@ s = socket.socket(socket.AF_INET,
 # number on local computer.
 s.connect(('127.0.0.1', port))
 
-cmd = input()
-s.send(cmd.encode())
+cmd = input("Enter command: ")
+if cmd == "speak":
+	variables.userTextToPrint = input("Enter text to speak: ")
+	s.send(cmd.encode())
 
 # disconnect the client
 s.close()

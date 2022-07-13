@@ -1,6 +1,8 @@
 import socket
 import playsound
 import os
+import functions
+import variables
 
 cwd = os.getcwd()
 
@@ -10,8 +12,7 @@ port = 65001
 
 # create a socket at server side
 # using TCP / IP protocol
-s = socket.socket(socket.AF_INET,
-				socket.SOCK_STREAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # bind the socket with server
 # and port number
@@ -26,11 +27,22 @@ s.listen(1)
 while(True):
 	c, addr = s.accept()
 	dataFromClient = c.recv(1024)
+	cmd = dataFromClient.decode()
 
-	if dataFromClient.decode() == "play":
-		print("Playing...")
+	if cmd == "play":
+		functions.play()
 		break
-		#playsound(cwd+'\Audio\Reville.wav')
+
+	elif cmd == "speak":
+		functions.speak(variables.userTextToPrint)
+		break
+
+	elif cmd == "quit" or cmd == "exit" or cmd == "q" or cmd == "Q" or cmd == "quit()":
+		functions.quit()
+
+	elif cmd == "light":
+		functions.light()
+		break
 
 # disconnect the server
 c.close()
