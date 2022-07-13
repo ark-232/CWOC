@@ -29,26 +29,23 @@ while(True):
 	print("Connected to client......")
 	dataFromClient = c.recv(1024)
 	decodedData = dataFromClient.decode()
+	print("Received data from client: " + decodedData)
 
 	# Decoded data split on the "@" = command @ phrase
-	cmd = decodedData.split("@")[0]
-	phrase = decodedData.split("@")[1]
+	if decodedData and "speak" in decodedData:
+		cmd = decodedData.split("@")[0]
+		phrase = decodedData.split("@")[1]
+		print("Text to speak is: " + phrase)
+		functions.speak(phrase)
 
-	if cmd == "play":
+	elif decodedData == "play":
 		print("Playing...")
 		functions.play()
-		break
 
-	elif cmd == "speak":
-		functions.speak(phrase)
-		break
-
-	elif cmd == "quit" or cmd == "exit" or cmd == "q" or cmd == "Q" or cmd == "quit()":
+	elif decodedData == "quit" or decodedData == "exit" or decodedData == "q" or decodedData == "Q" or decodedData == "quit()":
+		c.close()
 		functions.quit()
 
-	elif cmd == "light":
+	elif decodedData == "light":
 		functions.light()
-		break
 
-# disconnect the server
-c.close()
