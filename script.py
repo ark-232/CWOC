@@ -1,6 +1,9 @@
 from playsound import playsound
+import os
 import pyttsx3
+
 engine = pyttsx3.init() # pyttsx3 object creation
+cwd = os.getcwd()
 
 #make a loop that keeps the program running until the user wants to quit
 while True:
@@ -11,7 +14,7 @@ while True:
 
     elif user_input == "play":
         print("Playing...")
-        playsound("./Audio/Reville.wav")
+        playsound(cwd+'\Audio\Reville.wav')
 
     elif user_input == "lightning":
         engine.say("Lightning within 5 nautical miles!")
