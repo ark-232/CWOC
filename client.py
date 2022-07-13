@@ -1,11 +1,28 @@
 import socket
 
-HOST = "127.0.0.1"
-PORT = 65432
+# take the server name and port name
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
-    s.sendall("Hello, world!".encode())
-    data = s.recv(1024)
+host = 'local host'
+port = 65001
 
-print("Received", repr(data))
+# create a socket at client side
+# using TCP / IP protocol
+s = socket.socket(socket.AF_INET,
+				socket.SOCK_STREAM)
+
+# connect it to server and port
+# number on local computer.
+s.connect(('127.0.0.1', port))
+
+# receive message string from
+# server, at a time 1024 B
+msg = s.recv(1024)
+
+# repeat as long as message
+# string are not empty
+while msg:
+	print('Received: ' + msg.decode())
+	msg = s.recv(1024)
+
+# disconnect the client
+s.close()

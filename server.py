@@ -1,17 +1,35 @@
 import socket
 
-HOST = "127.0.0.1"
-PORT = 65432
+# take the server name and port name
+host = 'local host'
+port = 65001
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen()
-    conn, addr = s.accept()
-    with conn:
-        print("Connected by", addr)
-        while True:
-            data = conn.recv(1024)
-            if not data:
-                break
-            conn.sendall(data)
+# create a socket at server side
+# using TCP / IP protocol
+s = socket.socket(socket.AF_INET,
+				socket.SOCK_STREAM)
 
+# bind the socket with server
+# and port number
+s.bind(('', port))
+
+# allow maximum 1 connection to
+# the socket
+s.listen(1)
+
+# wait till a client accept
+# connection
+c, addr = s.accept()
+
+# display client address
+print("CONNECTION FROM:", str(addr))
+
+# send message to the client after
+# encoding into binary string
+c.send(b"CONNECTED")
+
+msg = " - PROCEED"
+c.send(msg.encode())
+
+# disconnect the server
+c.close()
