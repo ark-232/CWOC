@@ -1,5 +1,4 @@
 import socket
-import playsound
 import os
 import functions
 
