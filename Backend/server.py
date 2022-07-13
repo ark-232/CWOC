@@ -21,15 +21,18 @@ s.bind(('', port))
 # allow maximum 1 connection to
 # the socket
 s.listen(1)
+print("Waiting for connection......")
 
 # wait till a client accept
 # connection
 while(True):
+	print("Connected to client......")
 	c, addr = s.accept()
 	dataFromClient = c.recv(1024)
 	cmd = dataFromClient.decode()
 
 	if cmd == "play":
+		print("Playing...")
 		functions.play()
 		break
 

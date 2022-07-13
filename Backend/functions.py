@@ -7,7 +7,7 @@ cwd = os.getcwd()
 
 #make a loop that keeps the program running until the user wants to quit
 def quit():
-    print("Goodbye!")
+    print("Quitting...")
     exit()
 
 def play():

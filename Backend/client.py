@@ -14,6 +14,7 @@ s = socket.socket(socket.AF_INET,
 # connect it to server and port
 # number on local computer.
 s.connect(('127.0.0.1', port))
+print("Connected to server......")
 
 cmd = input("Enter command: ")
 if cmd == "speak":
