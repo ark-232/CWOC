@@ -3,7 +3,7 @@ import socket
 # take the server name and port name
 
 host = 'local host'
-port = 65001
+port = 65001	# port number
 
 # create a socket at client side
 # using TCP / IP protocol
@@ -14,15 +14,8 @@ s = socket.socket(socket.AF_INET,
 # number on local computer.
 s.connect(('127.0.0.1', port))
 
-# receive message string from
-# server, at a time 1024 B
-msg = s.recv(1024)
-
-# repeat as long as message
-# string are not empty
-while msg:
-	print('Received: ' + msg.decode())
-	msg = s.recv(1024)
+cmd = input()
+s.send(cmd.encode())
 
 # disconnect the client
 s.close()

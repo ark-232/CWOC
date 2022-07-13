@@ -1,4 +1,8 @@
 import socket
+import playsound
+import os
+
+cwd = os.getcwd()
 
 # take the server name and port name
 host = 'local host'
@@ -19,17 +23,14 @@ s.listen(1)
 
 # wait till a client accept
 # connection
-c, addr = s.accept()
+while(True):
+	c, addr = s.accept()
+	dataFromClient = c.recv(1024)
 
-# display client address
-print("CONNECTION FROM:", str(addr))
-
-# send message to the client after
-# encoding into binary string
-c.send(b"CONNECTED")
-
-msg = " - PROCEED"
-c.send(msg.encode())
+	if dataFromClient.decode() == "play":
+		print("Playing...")
+		break
+		#playsound(cwd+'\Audio\Reville.wav')
 
 # disconnect the server
 c.close()
