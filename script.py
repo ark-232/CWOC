@@ -4,9 +4,7 @@ import wave
 from playsound import playsound
 
 
-
-while True:
-    user_input = input()
-    if user_input == "exit":
-        break
-
+user_input = input()
+if user_input == "exit":
+    print("Goodbye!")
+    exit()
